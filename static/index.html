@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Team Clock — учёт рабочего времени</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body>
+<header><a class="brand" href="/">◷ <span>team<span class="accent">clock</span></span></a><span class="header-note">Меньше рутины. Больше ясности.</span><span class="badge">Локальное демо</span></header>
+<main>
+<section class="intro"><div class="eyebrow">РАБОЧИЙ РИТМ КОМАНДЫ</div><h1>Время под контролем<span class="accent">.</span></h1><p>Запускайте таймер, фиксируйте задачи и смотрите, куда уходят часы.</p></section>
+<div id="notice" role="status" aria-live="polite" hidden></div>
+<div class="workspace">
+<aside>
+<section class="card"><div class="section-label">01 / КОМАНДА</div><h2>Кто работает?</h2><form id="employee-form"><label for="employee-name">Новый сотрудник</label><div class="input-row"><input id="employee-name" name="name" maxlength="80" placeholder="Имя и фамилия" required><button class="square" type="submit" aria-label="Добавить сотрудника">+</button></div></form><div id="employees" class="employee-list"></div></section>
+<section class="card timer-card"><div class="section-label">02 / ФОКУС</div><h2>Текущая задача</h2><form id="timer-form"><label for="timer-employee">Сотрудник</label><select id="timer-employee" required><option value="">Добавьте сотрудника</option></select><label for="description">Над чем работаете?</label><textarea id="description" maxlength="500" rows="3" placeholder="Например, интеграция API" required></textarea><button id="start-button" class="primary" type="submit">▶ Запустить таймер</button></form><p class="hint">Один активный таймер на сотрудника. Время сохраняется на сервере.</p></section>
+</aside>
+<div class="content">
+<section class="card"><div class="section-heading"><div><div class="section-label">СЕЙЧАС В РАБОТЕ</div><h2>Активные таймеры <span id="running-count" class="count">0</span></h2></div><span class="live"><i></i> LIVE</span></div><div id="running"></div></section>
+<section class="card"><div class="section-heading"><div><div class="section-label">03 / ОБЗОР</div><h2>История и отчёт</h2></div><a id="export" class="secondary" href="/api/export.csv">↓ CSV</a></div>
+<form id="filters" class="filters"><div><label for="filter-employee">Сотрудник</label><select id="filter-employee"><option value="">Вся команда</option></select></div><div><label for="from">С даты · UTC</label><input id="from" type="date"></div><div><label for="to">По дату · UTC</label><input id="to" type="date"></div><button class="secondary" type="submit">Применить</button><button class="text-button" id="reset" type="button">Сбросить</button></form>
+<div class="metrics"><div><span class="metric-label">ВСЕГО ЗА ПЕРИОД</span><strong id="total">00:00:00</strong><span class="hint">часы : минуты : секунды</span></div><div><span class="metric-label">ЗАПИСЕЙ</span><strong id="entry-count">0</strong><span class="hint">в выбранном периоде</span></div></div>
+<div id="summary" class="summary"></div><div class="table-scroll"><table><thead><tr><th>Сотрудник / задача</th><th>Начало · UTC</th><th>За период</th><th>Статус</th></tr></thead><tbody id="entries"></tbody></table></div><p id="empty-history" class="empty">Пока нет записей. Добавьте сотрудника и запустите первый таймер.</p><p class="hint report-note">Обе даты включены. Задачи на границе периода учитываются только за время внутри него. Активные таймеры включены в итог.</p></section>
+</div></div>
+<footer><span>teamclock / Сделано для рабочего потока</span><span>SQLite · Без внешних сервисов</span></footer>
+</main></body></html>
