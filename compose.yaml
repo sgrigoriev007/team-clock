@@ -1,0 +1,15 @@
+services:
+  team-clock:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - clock-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/state', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+volumes:
+  clock-data:
